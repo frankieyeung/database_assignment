@@ -1,0 +1,29 @@
+<?php
+$severname = "localhost";
+$username = "root";
+$password = "A12345678";
+$database = "project_showcase";
+
+//create connection
+$conn = new mysqli($severname, $username, $password, $database);
+
+//check connection
+if ($conn->connect_error) {
+    die("Connection failed" . $conn->connect_error);
+}
+
+echo "Connected successfully.<br />";
+
+$sql = "SELECT * FROM projects";
+
+$result = $conn->query($sql);
+
+if($result->num_rows > 0) {
+
+    while($row = $result->fetch_assoc()){
+        echo "id: " . $row["id"]. " - Project Title: " . $row["project_title"] . "<br> " . "Project Category: " . $row["project_category"] . "<br>" . $row["project_description"] . "<br><hr/>";
+    }
+}
+
+
+?>
