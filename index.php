@@ -21,7 +21,7 @@ $result = $conn->query($sql);
 if($result->num_rows > 0) {
 
     while($row = $result->fetch_assoc()){
-        echo "id: " . $row["id"]. " - Project Title: " . $row["project_title"] . "<br> " . "Project Category: " . $row["project_category"] . "<br>" . $row["project_description"] . "<br><hr/>";
+        echo "id: " . $row["id"]. " - Project Title: " . $row["project_title"] . "<br> " . "Project Category: " . $row["project_category"] . "<br>" . "Project Description: " . $row["project_description"] . "<br>" . "Project File: " . "<a href=" . $row["project_file_name"] . ">" . $row["project_file_name"] . "</a><br><hr/>";
     }
 }
 

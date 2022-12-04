@@ -32,12 +32,22 @@
         $category = $_POST["category"];
         $description = $_POST["description"];
 
+        $target_dir = "uploads/";
+        $file_name = basename($_FILES["file"]["name"]);
+        $target_file_path = $target_dir . $file_name;
         //prepare query string
-        $sql = "INSERT INTO projects (project_title, project_category, project_description) VALUES ('" . $title . "', '" . $category . "', '" . $description . "')";
+
+        if (copy($_FILES["file"]["tmp_name"], $_FILES["file"]["name"])) {
+            echo "Project file upload successful.<br />";
+        } else {
+            echo "Project file upload failed.<br />";
+        }
+
+        $sql = "INSERT INTO projects (project_title, project_category, project_description, project_file_name) VALUES ('" . $title . "', '" . $category . "', '" . $description . "', '" . $file_name . "')";
 
         //perform query
         if ($conn->query($sql) === TRUE) {
-            echo "Project uploaded.<br/ >";
+            echo "Project information upload successful.<br/ >";
             echo "Redirecting to Index...";
             header("Refresh: 5; url=index.php");
         } else {
