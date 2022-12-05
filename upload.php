@@ -15,8 +15,8 @@
     require_once ("session.php");
     require_once ("project_showcase_config.php"); 
     require_once ("connectDB.php");
-    include("header.php"); 
     confirm_is_admin();
+
 
     
 

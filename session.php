@@ -10,13 +10,10 @@
     function confirm_is_admin() {
         if (!logged_on())
         {
-            header ("Location: logon.php");
+            header ("Location: login.php");
         }
 
-        if (!is_admin())
-        {
-            header ("Location: index.php");
-        }
+
     }
 
     function is_admin()
