@@ -9,22 +9,16 @@
 </head>
 
 <body>
+    <a href="index.php">Back to Index</a><br/>
     <?php
 
-    $severname = "localhost";
-    $username = "root";
-    $password = "A12345678";
-    $database = "project_showcase";
+    require_once ("session.php");
+    require_once ("project_showcase_config.php"); 
+    require_once ("connectDB.php");
+    include("header.php"); 
+    confirm_is_admin();
 
-    //create connection
-    $conn = new mysqli($severname, $username, $password, $database);
-
-    //check connection
-    if ($conn->connect_error) {
-        die("Connection failed" . $conn->connect_error);
-    }
-
-    echo "Connected successfully.<br />";
+    
 
     if (isset($_POST["submit"])) {
 
@@ -46,16 +40,14 @@
         $sql = "INSERT INTO projects (project_title, project_category, project_description, project_file_name) VALUES ('" . $title . "', '" . $category . "', '" . $description . "', '" . $file_name . "')";
 
         //perform query
-        if ($conn->query($sql) === TRUE) {
+        if ($databaseConnection->query($sql) === TRUE) {
             echo "Project information upload successful.<br/ >";
-            echo "Redirecting to Index...";
-            header("Refresh: 5; url=index.php");
         } else {
-            echo "Error: " . $sql . "<br/>" . $conn->error;
+            echo "Error: " . $sql . "<br/>" . $databaseConnection->error;
         }
     }
 
-    
+
 
 
     ?>
