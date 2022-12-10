@@ -2,6 +2,7 @@
     require_once ("session.php");
     require_once ("project_showcase_config.php"); 
     require_once ("connectDB.php");
+include('log.php');
 
 
     if (isset($_POST['submit']))
@@ -26,7 +27,12 @@
         {
             echo "Username/password incorrect";
         }
+
+        $log = new log("Logging in attempt from $username" , $username ,'Login Attempt' );
+        $log->createAction();
     }
+
+
 ?>
 
         <form action="login.php" method="post">
@@ -35,4 +41,8 @@
             <input type="submit" name="submit" value="Log In" /> <br/>
                 <a href="index.php">Back to Index</a>
     </form>
+
+
+
+
 

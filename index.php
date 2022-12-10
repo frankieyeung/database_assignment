@@ -3,6 +3,7 @@
 require_once("project_showcase_config.php");
 require_once("connectDB.php");
 include("header.php");
+include("log.php");
 ?>
 
 <?php
@@ -29,5 +30,7 @@ if ($result->num_rows > 0) {
         echo "id: " . $row["id"] . " - Project Title: " . $row["project_title"] . "<br> " . "<img src=" . $row["project_file_name"] . "><br/ >" . "Project Category: " . $row["project_category"] . "<br>" . "Project Description: " . $row["project_description"] . "<br>" . "Project File: " . "<a href=" . $row["project_file_name"] . ">" . $row["project_file_name"] . "</a><br><hr/>";
     }
 }
+
+
 
 ?>

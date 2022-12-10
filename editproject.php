@@ -21,7 +21,7 @@ if(isset($_GET['id']))
 
     if ($statement->error)
     {
-        die('資料庫查詢錯誤: ' . $statement->error);
+        die('Error ' . $statement->error);
     }
 
     $pageExists = $statement->num_rows == 1;
@@ -45,7 +45,7 @@ else if (isset($_POST["submit"])) {
     $target_dir = "uploads/";
     $file_name = basename($_FILES["file"]["name"]);
     $target_file_path = $target_dir . $file_name;
-    //prepare query string
+
 
     if (copy($_FILES["file"]["tmp_name"], $_FILES["file"]["name"])) {
         echo "Project file update successful.<br />";
@@ -61,10 +61,10 @@ else if (isset($_POST["submit"])) {
     $statement->store_result();
    
 
-    //perform query
+
     if ($statement->error)
     {
-        die('資料庫查詢錯誤: ' . $statement->error);
+        die('Error: ' . $statement->error);
     }
 
     $creationWasSuccessful = $statement->affected_rows == 1 ? true : false;
@@ -74,7 +74,7 @@ else if (isset($_POST["submit"])) {
     }
     else
     {
-        echo '錯誤: 編輯頁面錯誤...';
+        echo 'Error...';
     }
 }
 else
@@ -101,6 +101,6 @@ else
         <input type="hidden" id="pageId" name="pageId" value="<?php echo $pageId; ?>" />
         <input type="submit" name="submit" value="Update">
 
-    </form> <!-- End of outer-wrapper which opens in header.php -->
+    </form>
 
 

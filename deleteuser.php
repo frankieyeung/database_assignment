@@ -27,7 +27,7 @@
             die('Database query failed: ' . $statement->error);
         }
 
-        // TODO: Check for == 1 instead of > 0 when page names become unique.
+
         $deletionWasSuccessful = $statement->affected_rows > 0 ? true : false;
         if ($deletionWasSuccessful)
         {
@@ -68,4 +68,4 @@
         </fieldset>
     </form>
 </div>
-</div> <!-- End of outer-wrapper which opens in header.php -->
+</div> 

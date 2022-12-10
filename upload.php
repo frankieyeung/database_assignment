@@ -15,7 +15,7 @@
     require_once("session.php");
     require_once("project_showcase_config.php");
     require_once("connectDB.php");
-    confirm_is_admin();
+    confirm_is_user();
 
 
 
@@ -29,7 +29,7 @@
         $target_dir = "uploads/";
         $file_name = basename($_FILES["file"]["name"]);
         $target_file_path = $target_dir . $file_name;
-        //prepare query string
+
 
         if (copy($_FILES["file"]["tmp_name"], $_FILES["file"]["name"])) {
             echo "Project file upload successful.<br />";
@@ -39,7 +39,7 @@
 
         $sql = "INSERT INTO projects (project_title, project_category, project_description, project_file_name) VALUES ('" . $title . "', '" . $category . "', '" . $description . "', '" . $file_name . "')";
 
-        //perform query
+
         if ($databaseConnection->query($sql) === TRUE) {
             echo "Project information upload successful.<br/ >";
         } else {

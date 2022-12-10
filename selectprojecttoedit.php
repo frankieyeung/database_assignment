@@ -18,7 +18,6 @@ if (isset($_POST['submit']))
         die('Error: ' . $statement->error);
     }
 
-    // TODO: Check for == 1 instead of > 0 when page names become unique.
     $pageExists = $statement->num_rows == 1;
     if ($pageExists)
     {
@@ -31,10 +30,9 @@ if (isset($_POST['submit']))
 }
 ?>
 <div id="main">
-    <h2>編輯頁面</h2>
+    <h2>Edit project</h2>
     <form action="selectprojecttoedit.php" method="post">
-        <fieldset>
-            <legend>Edit Project</legend>
+
             <ol>
                 <li>
                     <label for="pageId">Project:</label>
@@ -59,9 +57,9 @@ if (isset($_POST['submit']))
                 </li>
             </ol>
             <input type="submit" name="submit" value="Edit" />
-        </fieldset>
+
     </form>
     <br/>
     <a href="index.php">Cancel</a>
 </div>
-</div> <!-- End of outer-wrapper which opens in header.php -->
+</div> 

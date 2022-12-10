@@ -21,17 +21,17 @@
             $addToUserRoleQuery = "INSERT INTO users_in_roles (user_id, role_id) VALUES (?, ?)";
             $addUserToUserRoleStatement = $databaseConnection->prepare($addToUserRoleQuery);
 
-            // TODO: Extract magic number for the 'user' role ID.
             $userRoleId = 2;
             $addUserToUserRoleStatement->bind_param('dd', $userId, $userRoleId);
             $addUserToUserRoleStatement->execute();
             $addUserToUserRoleStatement->close();
 
+        echo "User Created";
 
         }
         else
         {
-            echo "錯誤: 註冊失敗...";
+            echo "Error...";
         }
     }
 ?>
