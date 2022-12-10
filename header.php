@@ -9,6 +9,9 @@
                                 echo '<a href="selectprojecttoedit.php">Edit project</a>' . "<br />";
                                 echo '<a href="delete.php">Delete project</a>' . "<br />";
                                 echo '<a href="logout.php">Log out</a>' . "<br />";
+                                echo '<a href=createuser.php>Create user</a>' . "<br>";
+                                echo '<a href=deleteuser.php>Delete user</a>' . "<br>";
+
                             } else {
                                 echo '<a href="upload.php">Upload project</a>' . "<br />";
                                 echo '<a href="logout.php">Log out</a>' . "<br />";

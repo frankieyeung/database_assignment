@@ -83,7 +83,7 @@ else
 }
 ?>
  <form name="update_project" method="post" action="editproject.php" enctype="multipart/form-data">
-        Project Title:<input type="text" name="title"><br />
+        Project Title:<input type="text" name="title" value="<?php echo $project_title; ?>" /><br>
         Project Category:
         <select name="category">
             <option value="Art and Design">Art and Design</option>
@@ -96,7 +96,7 @@ else
             <option value="Research">Research</option>
             <option value="Science">Science</option>
         </select><br />
-        Project Description: <br /><textarea name="description" rows="10" cols="50"></textarea><br />
+        Project Description: <br /><textarea name="description" rows="10" cols="50"><?php echo $project_description; ?></textarea><br />
         Upload File:<input type="file" name="file" /><br />
         <input type="hidden" id="pageId" name="pageId" value="<?php echo $pageId; ?>" />
         <input type="submit" name="submit" value="Update">
