@@ -13,7 +13,10 @@
             header ("Location: login.php");
         }
 
-
+        if (!is_admin())
+        {
+            header ("Location: index.php");
+        }
     }
 
     function is_admin()
@@ -26,4 +29,3 @@
         $statement->store_result();
         return $statement->num_rows == 1;
     }
-?>

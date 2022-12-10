@@ -2,7 +2,7 @@
     require_once ("session.php");
     require_once ("project_showcase_config.php"); 
     require_once ("connectDB.php");
-    include ("header.php");
+
 
     if (isset($_POST['submit']))
     {

@@ -1,8 +1,8 @@
 <h1>HKIT Project Showcase</h1>
-<?php 
-        require_once ("project_showcase_config.php"); 
-        require_once  ("connectDB.php");
-        include("header.php");         
+<?php
+require_once("project_showcase_config.php");
+require_once("connectDB.php");
+include("header.php");
 ?>
 
 <?php

@@ -6,12 +6,14 @@ include("header.php");
 confirm_is_admin();
 
 $pageId = null;
-$menulabel = null;
-$content = null;
+$project_title = null;
+$project_category = null;
+$project_description = null;
+
 if(isset($_GET['id']))
 {
     $pageId = $_GET['id'];
-    $query = "SELECT project_title, project_category, project_description, project_file_name FROM projects WHERE id = ?";
+    $query = "SELECT project_title, project_category, project_description FROM projects WHERE id = ?";
     $statement = $databaseConnection->prepare($query);
     $statement->bind_param('d', $pageId);
     $statement->execute();
@@ -19,13 +21,13 @@ if(isset($_GET['id']))
 
     if ($statement->error)
     {
-        die('Error: ' . $statement->error);
+        die('資料庫查詢錯誤: ' . $statement->error);
     }
 
     $pageExists = $statement->num_rows == 1;
     if ($pageExists)
     {
-        $statement->bind_result($menulabel, $content);
+        $statement->bind_result($project_title, $project_category, $project_description);
         $statement->fetch();
     }
     else
@@ -33,21 +35,36 @@ if(isset($_GET['id']))
         header("Location: index.php");
     }
 }
-else if (isset($_POST['submit']))
-{
+else if (isset($_POST["submit"])) {
+
     $pageId = $_POST['pageId'];
-    $menulabel = $_POST['menulabel'];
-    $content = $_POST['content'];
-    $query = "UPDATE projects SET project_title = ?, project_category = ?, project_description = ?, project_file_name =? WHERE Id = ?";
+    $title = $_POST["title"];
+    $category = $_POST["category"];
+    $description = $_POST["description"];
+
+    $target_dir = "uploads/";
+    $file_name = basename($_FILES["file"]["name"]);
+    $target_file_path = $target_dir . $file_name;
+    //prepare query string
+
+    if (copy($_FILES["file"]["tmp_name"], $_FILES["file"]["name"])) {
+        echo "Project file update successful.<br />";
+    } else {
+        echo "Project file update failed.<br />";
+    }
+
+    $query = "UPDATE projects SET project_title = ?, project_category = ?, project_description = ?, project_file_name = ? WHERE Id = ?";
 
     $statement = $databaseConnection->prepare($query);
-    $statement->bind_param('ssd', $menulabel, $content, $pageId);
+    $statement->bind_param('ssssd', $title, $category, $description, $file_name, $pageId);
     $statement->execute();
     $statement->store_result();
+   
 
+    //perform query
     if ($statement->error)
     {
-        die('Error: ' . $statement->error);
+        die('資料庫查詢錯誤: ' . $statement->error);
     }
 
     $creationWasSuccessful = $statement->affected_rows == 1 ? true : false;
@@ -57,7 +74,7 @@ else if (isset($_POST['submit']))
     }
     else
     {
-        echo 'Error';
+        echo '錯誤: 編輯頁面錯誤...';
     }
 }
 else
@@ -65,7 +82,7 @@ else
     header ("Location: index.php");
 }
 ?>
-    <form name="edit_project" method="post" action="editproject.php" enctype="multipart/form-data">
+ <form name="update_project" method="post" action="editproject.php" enctype="multipart/form-data">
         Project Title:<input type="text" name="title"><br />
         Project Category:
         <select name="category">
@@ -81,8 +98,9 @@ else
         </select><br />
         Project Description: <br /><textarea name="description" rows="10" cols="50"></textarea><br />
         Upload File:<input type="file" name="file" /><br />
+        <input type="hidden" id="pageId" name="pageId" value="<?php echo $pageId; ?>" />
         <input type="submit" name="submit" value="Update">
 
-    </form><!-- End of outer-wrapper which opens in header.php -->
+    </form> <!-- End of outer-wrapper which opens in header.php -->
 
 

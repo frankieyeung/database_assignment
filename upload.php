@@ -9,16 +9,16 @@
 </head>
 
 <body>
-    <a href="index.php">Back to Index</a><br/>
+    <a href="index.php">Back to Index</a><br />
     <?php
 
-    require_once ("session.php");
-    require_once ("project_showcase_config.php"); 
-    require_once ("connectDB.php");
+    require_once("session.php");
+    require_once("project_showcase_config.php");
+    require_once("connectDB.php");
     confirm_is_admin();
 
 
-    
+
 
     if (isset($_POST["submit"])) {
 
